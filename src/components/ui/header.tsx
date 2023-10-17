@@ -1,9 +1,25 @@
-import { MenuIcon, ShoppingCart, LogIn, PercentIcon, ListOrderedIcon, HomeIcon } from "lucide-react";
+'use client'
+
+import { MenuIcon, ShoppingCart, LogIn, PercentIcon, ListOrderedIcon, HomeIcon, LogOut } from "lucide-react";
 import { Button } from "./button";
 import { Card } from "./card";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./sheet";
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import { Separator } from "./separator";
 
 const Header = () => {
+
+ const { status, data } = useSession()
+
+ const handleLoginClick = async () => {
+  await signIn();
+ }
+
+ const handleLogOutClick = async () => {
+  await signOut();
+ }
+
  return (
   <Card className="flex p-[1.875rem] justify-between">
    <Sheet>
@@ -20,11 +36,50 @@ const Header = () => {
       Menu
      </SheetHeader>
 
-     <div className="flex gap-3 flex-col mt-2">
-      <Button variant="outline" className="gap-2 w-full justify-start">
-       <LogIn size={16} />
-       Fazer Login
-      </Button>
+     {status === "authenticated" && data?.user && (
+
+      <div className="flex flex-col">
+       <div className="flex gap-2 items-center py-4">
+        <Avatar>
+         <AvatarFallback>
+          {data.user?.name?.[0].toUpperCase()}
+         </AvatarFallback>
+
+         {data.user.image && <AvatarImage src={data.user.image} />}
+        </Avatar>
+
+        <div className="flex flex-col">
+         <p className="font-medium">
+          {data.user.name}
+         </p>
+         <p className="text-sm opacity-75">
+          Boas compras!
+         </p>
+        </div>
+       </div>
+
+       <Separator />
+      </div>
+     )}
+
+
+     <div className="flex gap-3 flex-col mt-4">
+
+      {status == "unauthenticated" && (
+
+       <Button variant="outline" className="gap-2 w-full justify-start" onClick={handleLoginClick}>
+        <LogIn size={16} />
+        Fazer Login
+       </Button>
+
+      )}
+
+      {status == "authenticated" && (
+       <Button variant="outline" className="gap-2 w-full justify-start" onClick={handleLogOutClick}>
+        <LogOut size={16} />
+        Fazer Logout
+       </Button>
+      )}
 
       <Button variant="outline" className="gap-2 w-full justify-start">
        <HomeIcon size={16} />
