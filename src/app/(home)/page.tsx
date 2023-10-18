@@ -38,7 +38,7 @@ export default async function Home() {
           alt="Até 55% de desconto esse mês!"
         />
 
-        <div>
+        <div className="mt-8">
           <Categories />
         </div>
 
