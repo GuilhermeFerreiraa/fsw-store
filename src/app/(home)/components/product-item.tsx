@@ -1,8 +1,5 @@
-import { Badge } from "@/components/ui/badge";
 import DiscountBadge from "@/components/ui/discount-badge";
 import { ProductsWithTotalPrice } from "@/helpers/product";
-import { Product } from "@prisma/client";
-import { ArrowDown01Icon, ArrowDownIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
