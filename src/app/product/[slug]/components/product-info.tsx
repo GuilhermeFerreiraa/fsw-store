@@ -2,6 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import DiscountBadge from "@/components/ui/discount-badge";
 import { ProductsWithTotalPrice } from "@/helpers/product";
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, TruckIcon } from "lucide-react";
 import { useState } from "react";
@@ -29,10 +30,9 @@ const ProductInfo = ({ product: { basePrice, totalPrice, description, discountPe
    <div className="flex items-center gap-2">
     <h1 className="text-xl font-bold">R$ {totalPrice.toFixed(2).replace('.', ',')}</h1>
     {discountPercentage > 0 && (
-     <Badge className="left-3 top-3 px-2 py-[2px]">
-      <ArrowDownIcon size={14} />
-      {discountPercentage}%
-     </Badge>
+     <DiscountBadge>
+      {discountPercentage}
+     </DiscountBadge>
     )}
 
    </div>
@@ -69,7 +69,7 @@ const ProductInfo = ({ product: { basePrice, totalPrice, description, discountPe
     Adicionar ao Carrinho
    </Button>
 
-   <div className="bg-accent rounded-lg px-5 py-3 mt-5 flex justify-between items-center">
+   <div className="bg-accent rounded-lg px-5 py-2 mt-5 flex justify-between items-center">
     <div className="flex items-center gap-3">
 
      <TruckIcon />
