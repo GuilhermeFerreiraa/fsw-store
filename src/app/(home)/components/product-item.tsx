@@ -1,7 +1,5 @@
-import { Badge } from "@/components/ui/badge";
+import DiscountBadge from "@/components/ui/discount-badge";
 import { ProductsWithTotalPrice } from "@/helpers/product";
-import { Product } from "@prisma/client";
-import { ArrowDown01Icon, ArrowDownIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -26,10 +24,9 @@ const ProductItem = ({ product }: ProductItemProps) => {
      />
 
      {product.discountPercentage && (
-      <Badge className="absolute left-3 top-3 px-2 py-[2px]">
-       <ArrowDownIcon size={14} />
-       {product.discountPercentage}%
-      </Badge>
+      <DiscountBadge className="absolute left-3 top-3">
+       {product.discountPercentage}
+      </DiscountBadge>
      )}
     </div>
 
