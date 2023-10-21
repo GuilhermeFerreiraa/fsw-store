@@ -20,7 +20,7 @@ const Cart = () => {
   console.log(checkout);
 
   const stripe = await loadStripe(
-   process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY
+   process.env.NEXT_PUBLIC_STRIPE_API_KEY
   )
 
   stripe?.redirectToCheckout({
