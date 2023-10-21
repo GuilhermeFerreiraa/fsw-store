@@ -16,15 +16,48 @@ model Category {
 }
 
 model Product {
-  id                 String   @id @default(uuid())
+  id                 String     @id @default(uuid())
   name               String
   slug               String
   description        String
   imageUrls          String[]
-  basePrice          Decimal  @db.Decimal(8, 2)
+  basePrice          Decimal    @db.Decimal(8, 2)
   categoryId         String
-  discountPercentage Int      @default(0)
-  category           Category @relation(fields: [categoryId], references: [id])
+  discountPercentage Int        @default(0)
+  category           Category   @relation(fields: [categoryId], references: [id])
+  OrderItem          OrderItem? @relation(fields: [orderItemId], references: [id])
+  orderItemId        String?
+}
+
+model OrderStatus {
+  id                 String @id
+  PENDING            String
+  PAYMENT_SUCCESSFUL String
+  PAYMENT_REJECT     String
+  ORDER              Order? @relation(fields: [id], references: [id])
+}
+
+model OrderItem {
+  id      String    @id @default(uuid())
+  userId  String
+  user    User      @relation(fields: [userId], references: [id])
+  Order   Order?    @relation(fields: [orderId], references: [id])
+  orderId String
+  total   Decimal   @db.Decimal(8, 2)
+  product Product[]
+}
+
+model Order {
+  id            String        @id
+  userId        String        @map("user_id")
+  orderStatus   OrderStatus[]
+  orderItems    OrderItem[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  paymentMethod String[]
+  delivery      String
+  total         Decimal       @db.Decimal(8, 2)
+  userAccount   Account[]
 }
 
 model Account {
@@ -41,7 +74,9 @@ model Account {
   id_token          String? @db.Text
   session_state     String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Order   Order?  @relation(fields: [orderId], references: [id])
+  orderId String?
 
   @@unique([provider, providerAccountId])
 }
@@ -55,13 +90,14 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String      @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?     @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  OrderItem     OrderItem[]
 }
 
 model VerificationToken {
