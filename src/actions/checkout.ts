@@ -5,8 +5,9 @@ import { CartProduct } from "@/providers/cart"
 import Stripe from 'stripe'
 
 export const createCheckout = async (products: CartProduct[]) => {
+
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: '2023-10-16',
+    apiVersion: "2023-10-16",
   });
 
   const checkout = await stripe.checkout.sessions.create({
@@ -17,7 +18,7 @@ export const createCheckout = async (products: CartProduct[]) => {
     line_items: products.map((product) => {
       return {
         price_data: {
-          currency: 'BRL',
+          currency: "brl",
           product_data: {
             name: product.name,
             description: product.description,
@@ -26,9 +27,9 @@ export const createCheckout = async (products: CartProduct[]) => {
           unit_amount: Number(product.totalPrice) * 100,
         },
         quantity: product.quantity,
-      }
-    })
-  })
+      };
+    }),
+  });
 
   return checkout;
 }
