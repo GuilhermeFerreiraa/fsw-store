@@ -5,13 +5,15 @@ import { CartContext } from "@/providers/cart";
 import CartItem from "./cart-item";
 import { computeProductTotalPrice } from "@/helpers/product";
 import { Separator } from "./separator";
+import { ScrollArea } from "./scroll-area";
+import { Button } from "./button";
 
 const Cart = () => {
 
  const { products, total, subTotal, totalDiscount } = useContext(CartContext);
 
  return (
-  <div className="flex flex-col gap-8">
+  <div className="flex flex-col h-full gap-8">
    <Badge variant="outline" className="w-fit gap-1 border-primary px-3 py-[0.375rem] border-2 text-base uppercase">
     <ShoppingCartIcon size={16} />
     Carrinho
@@ -19,8 +21,12 @@ const Cart = () => {
 
    {products.length > 0 ? (
     <>
-     <div className="flex flex-col gap-5">
-      {products.map(product => <CartItem product={computeProductTotalPrice(product as any) as any} key={product.id} />)}
+     <div className="flex flex-col gap-5 overflow-hidden h-full max-h-full">
+      <ScrollArea className="h-full">
+       <div className="flex h-full flex-col gap-8">
+        {products.map(product => <CartItem product={computeProductTotalPrice(product as any) as any} key={product.id} />)}
+       </div>
+      </ScrollArea>
      </div>
 
      <ul className="flex flex-col gap-3">
@@ -61,6 +67,8 @@ const Cart = () => {
        </p>
       </li>
      </ul>
+
+     <Button className="font-bold mt-7 uppercase">Finalizar Compra</Button>
     </>
    ) : (
     <p className="text-center text-sm">

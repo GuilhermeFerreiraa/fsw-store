@@ -1,4 +1,3 @@
-import { ProductsWithTotalPrice } from "@/helpers/product";
 import { CartContext, CartProduct } from "@/providers/cart";
 import Image from "next/image";
 import { Button } from "./button";
