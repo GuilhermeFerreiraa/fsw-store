@@ -47,7 +47,6 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
 
  const total = useMemo(() => {
   return products.reduce((acc, products) => {
-   console.log('acc: ', acc, ' products: ', products)
    return acc + (Number(products.totalPrice) * products.quantity)
   }, 0);
  }, [products]);
