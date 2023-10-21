@@ -10,7 +10,7 @@ export const createCheckout = async (products: CartProduct[]) => {
   });
 
   const checkout = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
+    payment_method_types: ["card", 'boleto'],
     mode: "payment",
     success_url: "http://localhost:3000",
     cancel_url: "http://localhost:3000",
