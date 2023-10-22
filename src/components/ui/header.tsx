@@ -28,7 +28,7 @@ const Header = () => {
  }
 
  return (
-  <Card className="flex p-[1rem] justify-between items-center md:max-w-[90%] md:mx-auto md:w-full md:border-none md:min-h-[90px]">
+  <Card className="flex p-[1rem] justify-between items-center md:px-[3rem] md:mx-auto md:w-full md:min-h-[90px]">
 
    <div className="sm:hidden md:block">
     <Link href="/">

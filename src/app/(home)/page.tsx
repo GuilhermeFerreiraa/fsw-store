@@ -3,6 +3,7 @@ import { prismaClient } from "@/lib/prisma";
 import ProductList from "@/components/ui/product-list";
 import SectionTitle from "@/components/section-title";
 import PromoBanner from "./components/promo-banner";
+import Link from "next/link";
 
 export default async function Home() {
 
@@ -33,10 +34,12 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-y-8">
       <div className="hidden md:block">
-        <PromoBanner
-          src="/banner-desktop_home-01.png"
-          alt="Até 55% de desconto esse mês!"
-        />
+        <Link href="/deals" target="_blank">
+          <PromoBanner
+            src="/banner-desktop_home-01.png"
+            alt="Até 55% de desconto esse mês!"
+          />
+        </Link>
       </div>
       <div className="p-5">
         <div className="sm:block md:hidden">
