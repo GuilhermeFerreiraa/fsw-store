@@ -30,7 +30,7 @@ const Header = () => {
  return (
   <Card className="flex p-[1rem] justify-between items-center md:px-[3rem] md:mx-auto md:w-full md:min-h-[90px]">
 
-   <div className="sm:hidden md:block">
+   <div className="hidden md:block">
     <Link href="/">
      <h1 className="font-semibold text-lg">
       <span className="text-transparent mr-1 bg-clip-text bg-gradient-to-r from-accent-foreground to-primary">
@@ -138,7 +138,7 @@ const Header = () => {
     </h1>
    </Link>
 
-   <div className="sm:hidden md:flex items-center justify-center gap-8">
+   <div className="hidden md:flex items-center justify-center gap-8">
     <Link href="/">
      <p className="font-bold text-base hover:text-primary hover:opacity-90 transition-all ease-in">
       Início
@@ -167,7 +167,7 @@ const Header = () => {
    <Sheet>
     <div className="md:flex items-center justify-center md:gap-8">
 
-     <div className="sm:hidden md:block">
+     <div className="hidden md:block">
       <Button variant="outline" size="icon" onClick={handleLoginClick}>
        <User2 size={16} />
       </Button>
