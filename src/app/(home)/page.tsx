@@ -32,11 +32,19 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col gap-y-8">
-      <div className="p-5">
+      <div className="hidden md:block">
         <PromoBanner
-          src="/banner_home-01.png"
+          src="/banner-desktop_home-01.png"
           alt="Até 55% de desconto esse mês!"
         />
+      </div>
+      <div className="p-5">
+        <div className="sm:block md:hidden">
+          <PromoBanner
+            src="/banner_home-01.png"
+            alt="Até 55% de desconto esse mês!"
+          />
+        </div>
 
         <div className="mt-8">
           <Categories />
@@ -44,33 +52,54 @@ export default async function Home() {
 
       </div>
 
-      <div>
+      <div className="md:max-w-[90%] md:mx-auto">
         <SectionTitle>
           Ofertas
         </SectionTitle>
         <ProductList products={deals} />
       </div>
 
-      <PromoBanner
-        src="/banner_home-02.png"
-        alt="Até 55% de desconto em mouses!"
-      />
+      <div className="flex items-center justify-between md:w-full md:gap-12 md:max-w-[90%] md:mx-auto">
 
+        <PromoBanner
+          src="/banner-desktop_home-03.png"
+          alt="Até 55% de desconto em mouses!"
+        />
+        <PromoBanner
+          src="/banner-desktop_home-02.png"
+          alt="Até 55% de desconto em mouses!"
+        />
+      </div>
 
-      <div>
+      <div className="sm:block md:hidden">
+        <PromoBanner
+          src="/banner_home-02.png"
+          alt="Até 55% de desconto em mouses!"
+        />
+      </div>
+
+      <div className="md:max-w-[90%] md:w-full md:mx-auto">
         <SectionTitle>
           Teclados
         </SectionTitle>
         <ProductList products={keyboards} />
       </div>
 
-      <PromoBanner
-        src="/banner_home-03.png"
-        alt="Até 55% de desconto em mouses!"
-      />
+      <div className="sm:block md:hidden">
+        <PromoBanner
+          src="/banner_home-03.png"
+          alt="Até 55% de desconto em mouses!"
+        />
+      </div>
 
+      <div className="sm:hidden md:block">
+        <PromoBanner
+          src="/banner-desktop_home-04.png"
+          alt="Até 55% de desconto em mouses!"
+        />
+      </div>
 
-      <div>
+      <div className="md:max-w-[90%] md:w-full md:mx-auto">
         <SectionTitle>
           Mouses
         </SectionTitle>
