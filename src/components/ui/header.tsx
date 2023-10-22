@@ -1,6 +1,6 @@
 'use client'
 
-import { MenuIcon, ShoppingCart, LogIn, PercentIcon, ListOrderedIcon, HomeIcon, LogOut } from "lucide-react";
+import { MenuIcon, ShoppingCart, LogIn, PercentIcon, ListOrderedIcon, HomeIcon, LogOut, User2 } from "lucide-react";
 import { Button } from "./button";
 import { Card } from "./card";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTrigger } from "./sheet";
@@ -28,10 +28,22 @@ const Header = () => {
  }
 
  return (
-  <Card className="flex p-[1rem] justify-between items-center">
+  <Card className="flex p-[1rem] justify-between items-center md:max-w-[90%] md:mx-auto md:w-full md:border-none md:min-h-[90px]">
+
+   <div className="sm:hidden md:block">
+    <Link href="/">
+     <h1 className="font-semibold text-lg">
+      <span className="text-transparent mr-1 bg-clip-text bg-gradient-to-r from-accent-foreground to-primary">
+       FSW
+      </span>
+      Store
+     </h1>
+    </Link>
+   </div>
+
    <Sheet>
 
-    <SheetTrigger asChild>
+    <SheetTrigger asChild className="sm:block md:hidden">
      <Button variant="outline" size="icon">
       <MenuIcon />
      </Button>
@@ -120,27 +132,63 @@ const Header = () => {
     </SheetContent>
    </Sheet>
 
-   <Link href="/">
+   <Link href="/" className="sm:block md:hidden">
     <h1 className="font-semibold text-lg">
      <span className="text-primary">FSW</span> Store
     </h1>
    </Link>
 
+   <div className="sm:hidden md:flex items-center justify-center gap-8">
+    <Link href="/">
+     <p className="font-bold text-base hover:text-primary hover:opacity-90 transition-all ease-in">
+      Início
+     </p>
+    </Link>
+    <Separator
+     orientation="vertical"
+     className="bg-gray-400 w-[1px] border-0 h-4"
+    />
+    <Link href="/catalog">
+     <p className="font-bold text-base hover:text-primary hover:opacity-90 transition-all ease-in">
+      Catálogo
+     </p>
+    </Link>
+    <Separator
+     orientation="vertical"
+     className="bg-gray-400 w-[1px] border-0 h-4"
+    />
+    <Link href="/deals">
+     <p className="font-bold text-base hover:text-primary hover:opacity-90 transition-all ease-in">
+      Ofertas
+     </p>
+    </Link>
+   </div>
+
    <Sheet>
-    <SheetTrigger asChild>
-     <div className="relative flex">
-      <Button variant="outline" size="icon">
-       <ShoppingCart />
+    <div className="md:flex items-center justify-center md:gap-8">
+
+     <div className="sm:hidden md:block">
+      <Button variant="outline" size="icon" onClick={handleLoginClick}>
+       <User2 size={16} />
       </Button>
-      {products.length > 0 && (
-       <Badge className="absolute top-[-5px] right-[-5px] p-0 w-6 h-6 items-center justify-center">
-        <span className="text-xs font-semibold">
-         {products.length}
-        </span>
-       </Badge>
-      )}
      </div>
-    </SheetTrigger>
+
+     <SheetTrigger asChild>
+      <div className="relative flex">
+       <Button variant="outline" size="icon">
+        <ShoppingCart />
+       </Button>
+
+       {products.length > 0 && (
+        <Badge className="absolute top-[-5px] right-[-5px] p-0 w-6 h-6 items-center justify-center">
+         <span className="text-xs font-semibold">
+          {products.length}
+         </span>
+        </Badge>
+       )}
+      </div>
+     </SheetTrigger>
+    </div>
 
     <SheetContent className="w-[360px]">
      <Cart />
