@@ -62,7 +62,7 @@ export default async function Home() {
         <ProductList products={deals} />
       </div>
 
-      <div className="flex items-center justify-between md:w-full md:gap-12 md:max-w-[90%] md:mx-auto">
+      <div className="hidden md:flex items-center justify-between md:w-full md:gap-12 md:max-w-[90%] md:mx-auto">
 
         <PromoBanner
           src="/banner-desktop_home-03.png"
@@ -95,10 +95,10 @@ export default async function Home() {
         />
       </div>
 
-      <div className="sm:hidden md:block">
+      <div className="hidden md:block">
         <PromoBanner
           src="/banner-desktop_home-04.png"
-          alt="Até 55% de desconto em mouses!"
+          alt="Frete Grátis para todo Brasil"
         />
       </div>
 
