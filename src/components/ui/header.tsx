@@ -128,7 +128,7 @@ const Header = () => {
      </Button>
     </SheetTrigger>
 
-    <SheetContent>
+    <SheetContent className="w-[360px]">
      <Cart />
     </SheetContent>
    </Sheet>
