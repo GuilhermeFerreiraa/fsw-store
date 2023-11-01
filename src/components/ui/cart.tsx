@@ -1,24 +1,36 @@
-import { ShapesIcon, ShoppingCartIcon } from "lucide-react";
-import { Badge } from "./badge";
-import { useContext } from "react";
-import { CartContext } from "@/providers/cart";
-import CartItem from "./cart-item";
-import { computeProductTotalPrice } from "@/helpers/product";
-import { Separator } from "./separator";
-import { ScrollArea } from "./scroll-area";
-import { Button } from "./button";
 import { createCheckout } from "@/actions/checkout";
-import { loadStripe } from '@stripe/stripe-js'
+import { createOrder } from "@/actions/order";
+import { computeProductTotalPrice } from "@/helpers/product";
+import { CartContext } from "@/providers/cart";
+import { loadStripe } from '@stripe/stripe-js';
+import { ShoppingCartIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useContext } from "react";
+import { Badge } from "./badge";
+import { Button } from "./button";
+import CartItem from "./cart-item";
+import { ScrollArea } from "./scroll-area";
+import { Separator } from "./separator";
 
 
 const Cart = () => {
-
+ const { data } = useSession();
  const { products, total, subTotal, totalDiscount } = useContext(CartContext);
 
  const handleFinishPurchaseClick = async () => {
+
+  if (!data?.user) {
+   // redirect to login
+   return;
+  }
+
+  await createOrder(products, (data?.user as any).id);
+
   const checkout = await createCheckout(products);
 
   const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
+
+  // create order in database
 
   stripe?.redirectToCheckout({
    sessionId: checkout.id,
